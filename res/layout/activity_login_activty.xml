@@ -62,16 +62,6 @@
         android:text="會員登入"
         android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_below="@+id/textView2"
-        android:ems="10"
-        android:hint="請輸入密碼"
-        android:inputType="textPassword" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -87,17 +77,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText4"
-        android:layout_below="@+id/editText4"
-        android:layout_marginTop="14dp"
+        android:layout_below="@+id/textView2"
         android:ems="10"
         android:hint="請輸入帳號" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_below="@+id/editText3"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="請輸入密碼"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_below="@+id/editText3"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_below="@+id/editText4"
         android:text="登入" />
 
 </RelativeLayout>
