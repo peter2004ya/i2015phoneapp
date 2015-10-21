@@ -39,7 +39,8 @@ import java.security.MessageDigest;
 public class LoginActivty extends Activity {
 	
 	private ProgressDialog mProgressDialog;
-	private EditText AccountInput,PasswordInput;
+	private EditText UserInput,uPasswordInput,StroesInput,sPasswordInput;
+	private Button uLoginButton,cancleButton,signupButton,sLoginButton;
 
 
 	@Override
@@ -47,35 +48,36 @@ public class LoginActivty extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_activty);
 		
-		AccountInput = (EditText) findViewById(R.id.editText1);
-		PasswordInput = (EditText) findViewById(R.id.editText2);
+		UserInput = (EditText) findViewById(R.id.editText1);
+		uPasswordInput = (EditText) findViewById(R.id.editText2);
+		StroesInput = (EditText) findViewById(R.id.editText3);
+		sPasswordInput = (EditText) findViewById(R.id.editText4);
 		
-		Button loginButton  = (Button) findViewById(R.id.button1);
-		Button cancleButton = (Button) findViewById(R.id.button2);
-		Button signupButton = (Button) findViewById(R.id.button3);
-	
-		loginButton.setOnClickListener(mloginListener);
+		uLoginButton  = (Button) findViewById(R.id.button1);
+		cancleButton = (Button) findViewById(R.id.button2);
+		signupButton = (Button) findViewById(R.id.button3);
+		sLoginButton = (Button) findViewById(R.id.button4);
+		
+		uLoginButton.setOnClickListener(muLoginListener);
 		cancleButton.setOnClickListener(mcancleListener);
 		signupButton.setOnClickListener(msignupListener);
+		sLoginButton.setOnClickListener(msLoginListener);
 		
         mProgressDialog = new ProgressDialog(this);
-		mProgressDialog.setMessage("確認登入中");
+		mProgressDialog.setMessage("確認登入中...");
 	}
 	
-    private OnClickListener mloginListener = new OnClickListener() {
+	//使用者登入
+    private OnClickListener muLoginListener = new OnClickListener() {
     	
 		public void onClick(View v) {
 			
 			try {
-				String strAccount = URLEncoder.encode(AccountInput.getEditableText().toString(), "UTF-8");
-				//String strPassword = URLEncoder.encode(PasswordInput.getEditableText().toString(), "UTF-8");
-		
+				String strAccount = URLEncoder.encode(UserInput.getEditableText().toString(), "UTF-8");
 				mProgressDialog.show();
-				
-				String url = "http://i2015server.herokuapp.com/api/user/query?User=" + strAccount;				
+				String url = "http://i2015server.herokuapp.com/user/login?User=" + strAccount;				
 				StringRequest request = new StringRequest(Request.Method.GET, url, LoginSuccessListener, LoginErrorListener);
 				NetworkManager.getInstance(LoginActivty.this).request(null, request);
-				
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -88,75 +90,32 @@ public class LoginActivty extends Activity {
 		@Override
 		public void onResponse(String response) {
 			try {
+				JSONArray array = new JSONArray(response);
 				
-				JSONArray array = new JSONArray(response);		
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject obj = array.getJSONObject(i);
 					DataPassword = obj.getString("Password");	
 					UID = obj.getString("_id");
-				}
-				
-				
+				}	
 			}catch (JSONException e1) {
 				e1.printStackTrace();
 			}finally {
 				mProgressDialog.dismiss();
 			}
-						
-			String strPassword = (PasswordInput.getEditableText().toString());
+	
+			String strPassword = (uPasswordInput.getEditableText().toString());
 			
 			if(DataPassword.equals(strPassword)){
 				Intent intent = new Intent(LoginActivty.this, MainActivity.class);				 
 				startActivity(intent);
-				LoginActivty.this.finish();
-				
-	    
-	             
+				LoginActivty.this.finish();        
 			}else{
 				Toast toast = Toast.makeText(LoginActivty.this,"密碼錯誤！",Toast.LENGTH_SHORT);
 				toast.show();
-				PasswordInput.setText("");
+				uPasswordInput.setText("");
 			}
-			
 		}
 	};
-	
-	   public static String MD5(String str)  
-	    {  
-	        MessageDigest md5 = null;  
-	        try  
-	        {  
-	            md5 = MessageDigest.getInstance("MD5");  
-	        }catch(Exception e)  
-	        {  
-	            e.printStackTrace();  
-	            return "";  
-	        }  
-	          
-	        char[] charArray = str.toCharArray();  
-	        byte[] byteArray = new byte[charArray.length];  
-	          
-	        for(int i = 0; i < charArray.length; i++)  
-	        {  
-	            byteArray[i] = (byte)charArray[i];  
-	        }  
-	        byte[] md5Bytes = md5.digest(byteArray);  
-	          
-	        StringBuffer hexValue = new StringBuffer();  
-	        for( int i = 0; i < md5Bytes.length; i++)  
-	        {  
-	            int val = ((int)md5Bytes[i])&0xff;  
-	            if(val < 16)  
-	            {  
-	                hexValue.append("0");  
-	            }  
-	            hexValue.append(Integer.toHexString(val));  
-	        }  
-	        return hexValue.toString();  
-	    }  
-	      
-
-	
 	protected ErrorListener LoginErrorListener = new ErrorListener() {
 
 		@Override
@@ -165,14 +124,75 @@ public class LoginActivty extends Activity {
 		}
 	};
 	
-		//離開
+	//店家登入
+    private OnClickListener msLoginListener = new OnClickListener() {
+    	
+		public void onClick(View v) {
+			
+			try {
+				String strAccount = URLEncoder.encode(StroesInput.getEditableText().toString(), "UTF-8");
+	
+				mProgressDialog.show();
+				
+				String url = "http://i2015server.herokuapp.com/stores/login?Store=" + strAccount;				
+				StringRequest request = new StringRequest(Request.Method.GET, url, LoginSuccessListener1, LoginErrorListener1);
+				NetworkManager.getInstance(LoginActivty.this).request(null, request);
+				
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	};
+	
+	protected Listener<String> LoginSuccessListener1 = new Listener<String>() {
+		private String DataPassword,UID;
+		
+		@Override
+		public void onResponse(String response) {
+			try {
+				JSONArray array = new JSONArray(response);
+				
+				for (int i = 0; i < array.length(); i++) {
+					JSONObject obj = array.getJSONObject(i);
+					DataPassword = obj.getString("Password");	
+					UID = obj.getString("_id");
+				}	
+			}catch (JSONException e1) {
+				e1.printStackTrace();
+			}finally {
+				mProgressDialog.dismiss();
+			}
+	
+			String strPassword = (sPasswordInput.getEditableText().toString());
+			
+			if(DataPassword.equals(strPassword)){
+				Intent intent = new Intent(LoginActivty.this, StoresActivity.class);				 
+				startActivity(intent);
+				LoginActivty.this.finish();        
+			}else{
+				Toast toast = Toast.makeText(LoginActivty.this,"密碼錯誤！",Toast.LENGTH_SHORT);
+				toast.show();
+				sPasswordInput.setText("");
+			}
+		}
+	};
+	
+	protected ErrorListener LoginErrorListener1 = new ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError err) {
+			mProgressDialog.dismiss();
+		}
+	};
+	
+	//離開
 	private OnClickListener mcancleListener = new OnClickListener() {
 			
 			public void onClick(View v) {
 				LoginActivty.this.finish(); 
 			}
 		};
-		//註冊
+	//註冊
 	private OnClickListener msignupListener = new OnClickListener() {
 			
 			public void onClick(View v) {

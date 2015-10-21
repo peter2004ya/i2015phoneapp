@@ -61,7 +61,7 @@ public class SignupActivity extends Activity {
 				String strPassword = URLEncoder.encode(mPassword.getEditableText().toString(), "UTF-8");
 				mProgressDialog.show();
 				
-				String url = "http://i2015server.herokuapp.com/api/user/signup?NM=" + strNM + "&MP=" + strMP + "&Email=" + strEmail + "&User=" + strUser + "&Password=" + strPassword;
+				String url = "http://i2015server.herokuapp.com/user/signup?NM=" + strNM + "&MP=" + strMP + "&Email=" + strEmail + "&User=" + strUser + "&Password=" + strPassword;
 				StringRequest request = new StringRequest(Request.Method.GET, url, mOnAddSuccessListener, mOnErrorListener);
 				NetworkManager.getInstance(SignupActivity.this).request(null, request);
 			} catch (UnsupportedEncodingException e) {
