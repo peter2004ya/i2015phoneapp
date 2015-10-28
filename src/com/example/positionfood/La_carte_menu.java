@@ -62,6 +62,10 @@ public class La_carte_menu extends Activity {
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			Log.d("Clivk", "groupPosition " + groupPosition + ", childPosition " + childPosition);
+			Intent intent = new Intent();
+			intent.setClass(La_carte_menu.this, MenuActivity.class);
+			startActivity(intent);
+			La_carte_menu.this.finish();
 			return true;
 		}
 		
