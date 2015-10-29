@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 
 public class La_carte_menu extends Activity {
 
+	    private Bundle bundle;
 		int[] img = new int[]{R.drawable.tw, R.drawable.jp, R.drawable.kr, R.drawable.tl, R.drawable.am, R.drawable.id, R.drawable.vgt};
 		String[] Cname = new String[]{"中式","日式","韓式","泰式料理","美式","印度料理","素食"};
 		String[] Ename = new String[]{"Chinese","Japan","Koren","Thailand","America","India","Vegetarian food"};
@@ -46,6 +49,7 @@ public class La_carte_menu extends Activity {
 		ExpandableListView listview =(ExpandableListView)findViewById(R.id.list);
 		
 		MyAdapter adapter = new MyAdapter(this);
+		listview.setOnItemClickListener(lvClick);
 		listview.setAdapter(adapter);
 		listview.setOnGroupClickListener(new OnGroupClickListener() {
 			
@@ -62,10 +66,19 @@ public class La_carte_menu extends Activity {
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			Log.d("Clivk", "groupPosition " + groupPosition + ", childPosition " + childPosition);
-			Intent intent = new Intent();
-			intent.setClass(La_carte_menu.this, MenuActivity.class);
-			startActivity(intent);
-			La_carte_menu.this.finish();
+			TextView tv1 = (TextView) v.findViewById(R.id.textView1);
+			final String title = tv1.getText().toString();
+			Log.d("click", title.subSequence(1, 2).toString());
+			String str = title.subSequence(1, 3).toString();
+			
+			switch (str) {
+			case "(A1)":
+				getDemo("(A1)");
+				break;
+			case "(B1)":
+				getDemo("(B1)");
+				break;
+			}
 			return true;
 		}
 		
@@ -199,4 +212,43 @@ public class La_carte_menu extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-}
+	
+	private OnItemClickListener lvClick = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			
+			TextView tv1 = (TextView) view.findViewById(R.id.textView1);
+			final String title = tv1.getText().toString();
+			Log.d("click", title.subSequence(1, 2).toString());
+			String str = title.subSequence(1, 3).toString();
+			
+			switch (str) {
+			case "(A1)":
+				getDemo("(A1)");
+				break;
+			case "(B1)":
+				getDemo("(B1)");
+				break;
+			}
+		}
+	};
+	    private void getDemo(String i){
+		    Intent intent;
+		    intent = new Intent(La_carte_menu.this,ShopActivity.class);
+		    startActivity(intent);
+			La_carte_menu.this.finish();
+		    bundle = new Bundle();
+		    bundle.putString("demo", i); 
+		    intent.putExtras(bundle);
+		    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		    startActivity(intent);
+	      }
+	 }
+
+
+
+
+     

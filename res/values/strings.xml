@@ -10,5 +10,6 @@
     <string name="title_activity_la_carte_menu">la carte_menu</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_stores">StoresActivity</string>
+    <string name="title_activity_shop">ShopActivity</string>
 
 </resources>
