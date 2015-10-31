@@ -1,6 +1,7 @@
 package com.example.positionfood;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,8 +25,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class La_carte_menu extends Activity {
-
+	
 	    private Bundle bundle;
+		
 		int[] img = new int[]{R.drawable.tw, R.drawable.jp, R.drawable.kr, R.drawable.tl, R.drawable.am, R.drawable.id, R.drawable.vgt};
 		String[] Cname = new String[]{"中式","日式","韓式","泰式料理","美式","印度料理","素食"};
 		String[] Ename = new String[]{"Chinese","Japan","Koren","Thailand","America","India","Vegetarian food"};
@@ -42,6 +44,7 @@ public class La_carte_menu extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_la_carte_menu);
+		
 		
 		Button ReturnButton  = (Button) findViewById(R.id.button1);
 		ReturnButton.setOnClickListener(ReturnListener);
@@ -72,10 +75,10 @@ public class La_carte_menu extends Activity {
 			String str = title.subSequence(1, 3).toString();
 			
 			switch (str) {
-			case "(A1)":
+			case "A1":
 				getDemo("(A1)");
 				break;
-			case "(B1)":
+			case "B1":
 				getDemo("(B1)");
 				break;
 			}
@@ -236,8 +239,9 @@ public class La_carte_menu extends Activity {
 		}
 	};
 	    private void getDemo(String i){
-		    Intent intent;
-		    intent = new Intent(La_carte_menu.this,ShopActivity.class);
+		    //Intent intent;
+	    	
+	    	Intent intent = new Intent(La_carte_menu.this,ShopActivity.class);
 		    startActivity(intent);
 			La_carte_menu.this.finish();
 		    bundle = new Bundle();

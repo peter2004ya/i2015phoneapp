@@ -11,5 +11,6 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_stores">StoresActivity</string>
     <string name="title_activity_shop">ShopActivity</string>
+    <string name="title_activity_try_main">TryMainActivity</string>
 
 </resources>

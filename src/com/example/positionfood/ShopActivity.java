@@ -24,18 +24,18 @@ public class ShopActivity extends Activity {
 	private String str;
 	ListView listView;
 	String[][] aname = new String[][] {
-			{"µ·¥Ê¤pÅ¢¥]","1","price:120"},
-			{"Âû¦×¤pÅ¢¥]","2","price:180"},
-			{"ÂA½¼¤pÅ¢¥]","3","price:200"},
-			{"¬õ¿N¤û¦×ÄÑ","4","price:180"},
-			{"±Æ°©³Jª£¶º","5","160"}
+			{"µ·¥Ê¤pÅ¢¥]","1","$120"},
+			{"Âû¦×¤pÅ¢¥]","2","$180"},
+			{"ÂA½¼¤pÅ¢¥]","3","$200"},
+			{"¬õ¿N¤û¦×ÄÑ","4","$180"},
+			{"±Æ°©³Jª£¶º","5","$160"}
 			};
 	String[][] bname = new String[][] {
-			{"name:¯À­¹»]»å","id:1","price:100"},
-			{"name:©ÛµP¯O»æ","id:2","price:80"},
-			{"name:»Èµ·¨÷","id:3","price:40"},
-			{"name:ÂAÛ£Àí¶º","id:4","price:120"},
-			{"name:­»ÝÏª£¶º","id:5","price:120"}
+			{"¯À­¹»]»å","1","$100"},
+			{"©ÛµP¯O»æ","2","$80"},
+			{"»Èµ·¨÷","3","$40"},
+			{"ÂAÛ£Àí¶º","4","$120"},
+			{"­»ÝÏª£¶º","5","$120"}
 			};
 			
 			
@@ -172,15 +172,7 @@ public class ShopActivity extends Activity {
 			case 5:
 			
 				break;
-			case 6:
 			
-				break;
-			case 7:
-	
-				break;
-			case 8:
-
-				break;
 			}
 		}
 	};
