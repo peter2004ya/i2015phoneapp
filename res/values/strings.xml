@@ -12,5 +12,7 @@
     <string name="title_activity_stores">StoresActivity</string>
     <string name="title_activity_shop">ShopActivity</string>
     <string name="title_activity_try_main">TryMainActivity</string>
+    <string name="title_activity_sum_main">SumMainActivity</string>
+    <string name="title_activity_bon_appetite">BonAppetite</string>
 
 </resources>

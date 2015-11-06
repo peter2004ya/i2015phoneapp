@@ -56,6 +56,14 @@
             android:name=".TryMainActivity"
             android:label="@string/title_activity_try_main" >
         </activity>
+        <activity
+            android:name=".SumMainActivity"
+            android:label="@string/title_activity_sum_main" >
+        </activity>
+        <activity
+            android:name=".BonAppetite"
+            android:label="@string/title_activity_bon_appetite" >
+        </activity>
     </application>
 
 </manifest>
